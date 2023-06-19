@@ -38,12 +38,17 @@ def softmax(X):
     Returns:
         softmax output as a numpy array
     """
-    # exp_X = np.exp(X)
-    # sum_exp_X = np.sum(exp_X, axis=-1, keepdims=True)
-    # softmax_output = exp_X / sum_exp_X
-    ez = np.exp(X)              #element-wise exponenial
-    softmax_output = ez/np.sum(ez)
-    return softmax_output
+    #exp_X = np.exp(X)
+    ##sum_exp_X = np.sum(exp_X, axis=-1, keepdims=True)
+    #softmax_output = exp_X / sum_exp_X
+    #ez = np.exp(X)              #element-wise exponenial
+    #softmax_output = ez/np.sum(ez)
+    #return softmax_output
+    e = np.exp(X - np.max(X))
+    if e.ndim == 1:
+        return e / np.sum(e, axis=0)
+    else: # dim = 2
+        return e / np.sum(e, axis=1, keepdims=True)
 
 # Test cases
 if __name__ == "__main__":
